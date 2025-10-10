@@ -20,26 +20,14 @@ export class IcePlanner extends DDDSuper(I18NMixin(LitElement)) {
 
   constructor() {
     super();
-    this.title = "";
-    this.t = this.t || {};
-    this.t = {
-      ...this.t,
-      title: "Title",
-    };
-    this.registerLocalization({
-      context: this,
-      localesPath:
-        new URL("./locales/ice-planner.ar.json", import.meta.url).href +
-        "/../",
-      locales: ["ar", "es", "hi", "zh"],
-    });
+
   }
 
   // Lit reactive properties
   static get properties() {
     return {
       ...super.properties,
-      title: { type: String },
+      title: { type: String, reflect: true },
     };
   }
 

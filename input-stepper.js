@@ -47,11 +47,10 @@ export class InputStepper extends DDDSuper(I18NMixin(LitElement)) {
         display: block;
         color: var(--ddd-theme-default-coalyGray);
         background-color: var(--ddd-theme-default-roarLight);
-        font-family: var(--ddd-font-navigation);
       }
       .wrapper {
         margin: var(--ddd-spacing-2);
-        padding: var(--ddd-spacing-2);
+        padding: var(--ddd-spacing-0);
       }
       .controls {
         display: flex;
@@ -95,7 +94,7 @@ export class InputStepper extends DDDSuper(I18NMixin(LitElement)) {
           <button @click="${this.decrease}" ?disabled="${this.min === this.value}">-</button>
           <input 
             type="number" 
-            value="${this.value}" 
+            .value="${String(this.value)}" 
             @input="${this.handleInput}"
             min="${this.min}" 
             max="${this.max}" 
@@ -120,13 +119,25 @@ export class InputStepper extends DDDSuper(I18NMixin(LitElement)) {
     }
   }
 
-  // Method to handle direct input changes
   handleInput(e) {
-    const newValue = parseFloat(e.target.value);
-    if (!isNaN(newValue)) {
-      this.value = Math.max(this.min, Math.min(this.max, newValue));
-    }
+  const newValue = Number(e.target.value);
+  if (!isNaN(newValue)) {
+    const clamped = Math.min(this.max, Math.max(this.min, newValue));
+    this.value = clamped;
+  } else {
+    e.target.value = String(this.value);
   }
+}
+
+updated(changedProperties) {
+  if (changedProperties.has("value")) {
+    this.dispatchEvent(new CustomEvent("value-changed", {
+      detail: { value: this.value, label: this.label },
+      bubbles: true,
+      composed: true,
+    }));
+  }
+}
 
   /**
    * haxProperties integration via file reference

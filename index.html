@@ -12,43 +12,27 @@
       margin: var(--ddd-spacing-0);
       padding: var(--ddd-spacing-0);
     }
-    #demo {
-      margin: var(--ddd-spacing-2);
-    }
     ice-planner {
       margin: var(--ddd-spacing-2);
       border: var(--ddd-border-md);
       border-radius: var(--ddd-radius-lg);
     }
-    ice-planner:hover {
-      box-shadow: var(--ddd-boxShadow-sm);
-    }
-    input-stepper {
-      margin: var(--ddd-spacing-2);
-      border: var(--ddd-border-md);
-      border-radius: var(--ddd-radius-lg);
-    }
-    #example {
-      --ice-planner-font-size: var(--ddd-font-size-l);
-      background-color: var(--ddd-accent-2);
-      color: var(--ddd-primary-17);
-    }
   </style>
-  <title>ice-planner</title>
 </head>
 
 <body>
-  <div id="demo">
-    <h1>ice-planner</h1>
-    <ice-planner></ice-planner>
-    <ice-planner id="example" title="Sample property title"></ice-planner>
+    <h2>ice-planner</h2>
+      <ice-planner 
+      teamName="Bulldogs" 
+      logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRovZgqcQsXP-RQ19KJzxN0NUb1OCLXaNOr0w&s">
 
-    <hr>
-    <h2>input-stepper tester</h2>
-    <input-stepper label="Ice Hours" value="10" min="1" max="50" step="1"></input-stepper>
-    <input-stepper label="Cost per Hour ($)" value="150" min="0" max="500" step="5"></input-stepper>
-    <input-stepper label="Number of Players" value="15" min="5" max="30" step="1"></input-stepper>
-  </div>
+        <input-stepper label="Ice Cost per Hour ($)" value="300" min="0" max="1000" step="10"></input-stepper>
+        <input-stepper label="Hours of Ice" value="50" min="0" max="200" step="1"></input-stepper>
+        <input-stepper label="Coach Cost ($)" value="3000" min="0" max="10000" step="100"></input-stepper>
+        <input-stepper label="Jersey Cost ($)" value="88" min="0" max="500" step="10"></input-stepper>
+        <input-stepper label="Number of Players" value="1" min="1" max="50" step="1"></input-stepper>
+      </ice-planner>
+
   
   <script type="module" src="./ice-planner.js"></script>
   <script type="module" src="./input-stepper.js"></script>

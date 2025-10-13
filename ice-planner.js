@@ -144,8 +144,8 @@ export class IcePlanner extends DDDSuper(I18NMixin(LitElement)) {
       const stepper = e.target;
       const label = stepper.label?.toLowerCase();
 
-      if (label.includes("ice")) this.iceCost = e.detail.value;
-      else if (label.includes("hour")) this.hours = e.detail.value;
+      if (label.includes("ice cost")) this.iceCost = e.detail.value;
+      else if (label.includes("hours of ice")) this.hours = e.detail.value;
       else if (label.includes("coach")) this.coachCost = e.detail.value;
       else if (label.includes("jersey")) this.jerseyCost = e.detail.value;
       else if (label.includes("player")) this.numPlayers = e.detail.value;

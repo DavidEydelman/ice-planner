@@ -30,7 +30,7 @@ export class IcePlanner extends DDDSuper(I18NMixin(LitElement)) {
     this.feePercent = 2;
     this.fixedFee = 0.99;
     this.numPlayers = 1;
-    
+
     // Calculated values
     this.totalCost = 0;
     this.costPerPlayer = 0;
@@ -49,8 +49,8 @@ export class IcePlanner extends DDDSuper(I18NMixin(LitElement)) {
       feePercent: { type: Number, reflect: true },
       fixedFee: { type: Number, reflect: true },
       numPlayers: { type: Number, reflect: true },
-      totalCost: { type: Number},
-      costPerPlayer: { type: Number},
+      totalCost: { type: Number },
+      costPerPlayer: { type: Number },
     };
   }
 

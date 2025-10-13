@@ -120,24 +120,24 @@ export class InputStepper extends DDDSuper(I18NMixin(LitElement)) {
   }
 
   handleInput(e) {
-  const newValue = Number(e.target.value);
-  if (!isNaN(newValue)) {
-    const clamped = Math.min(this.max, Math.max(this.min, newValue));
-    this.value = clamped;
-  } else {
-    e.target.value = String(this.value);
+    const newValue = Number(e.target.value);
+    if (!isNaN(newValue)) {
+      const clamped = Math.min(this.max, Math.max(this.min, newValue));
+      this.value = clamped;
+    } else {
+      e.target.value = String(this.value);
+    }
   }
-}
 
-updated(changedProperties) {
-  if (changedProperties.has("value")) {
-    this.dispatchEvent(new CustomEvent("value-changed", {
-      detail: { value: this.value, label: this.label },
-      bubbles: true,
-      composed: true,
-    }));
+  updated(changedProperties) {
+    if (changedProperties.has("value")) {
+      this.dispatchEvent(new CustomEvent("value-changed", {
+        detail: { value: this.value, label: this.label },
+        bubbles: true,
+        composed: true,
+      }));
+    }
   }
-}
 
   /**
    * haxProperties integration via file reference

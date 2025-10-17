@@ -31,6 +31,8 @@ export class IcePlanner extends DDDSuper(I18NMixin(LitElement)) {
     this.fixedFee = 0.99;
     this.numPlayers = 1;
 
+    this.calculatorSettings = { url: "" };
+
     // Calculated values
     this.totalCost = 0;
     this.costPerPlayer = 0;
@@ -87,6 +89,7 @@ export class IcePlanner extends DDDSuper(I18NMixin(LitElement)) {
         margin-bottom: var(--ddd-spacing-4);
       }
       .results {
+        position: relative;
         text-align: center;
         padding: var(--ddd-spacing-4);
         background-color: var(--ddd-theme-default-coalyGray);
@@ -96,6 +99,19 @@ export class IcePlanner extends DDDSuper(I18NMixin(LitElement)) {
         width: 40%;
         margin-left: auto;
         margin-right: auto;
+      }
+      .results button {
+        position: absolute;
+        top: var(--ddd-spacing-2);
+        right: var(--ddd-spacing-2);
+        padding: var(--ddd-spacing-2);
+        font-size: var(--ddd-font-size-sm);
+        border: var(--ddd-border-sm);
+        cursor: pointer;
+        border-radius: var(--ddd-radius-sm);
+      }
+      .results button:hover {
+        background-color: var(--ddd-theme-default-shrineTan);
       }
       .results .total {
         font-size: var(--ddd-font-size-l);
@@ -125,6 +141,7 @@ export class IcePlanner extends DDDSuper(I18NMixin(LitElement)) {
         </div>
 
         <div class="results">
+          <button @click="${this.copyShareLink}">Copy Share Link</button>
           <div class="total">Total Cost: $${this.totalCost.toFixed(2)}</div>
           <div class="per-player">Cost Per Player: $${this.costPerPlayer.toFixed(2)}</div>
         </div>
@@ -160,6 +177,26 @@ export class IcePlanner extends DDDSuper(I18NMixin(LitElement)) {
     this.costPerPlayer = this.totalCost / this.numPlayers;
   }
 
+  copyShareLink() {
+    this.buildURL();
+    navigator.clipboard.writeText(`${this.calculatorSettings.url}`).then;
+    alert("Link copied to clipboard!");
+  }
+
+  buildURL() {
+    const baseUrl = globalThis.location.origin;
+    const paramData = {
+    iceCost : this.iceCost,
+    hours : this.hours,
+    coachCost : this.coachCost,
+    jerseyCost :  this.jerseyCost,
+    numPlayers : this.numPlayers
+    };
+    const params = new URLSearchParams(paramData).toString();
+    this.calculatorSettings.url = `${baseUrl}?${params}`;
+  }
+
+  
   /**
    * haxProperties integration via file reference
    */

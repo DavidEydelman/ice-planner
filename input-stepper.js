@@ -129,6 +129,28 @@ export class InputStepper extends DDDSuper(I18NMixin(LitElement)) {
     }
   }
 
+  connectedCallback() {
+    super.connectedCallback();
+    this.loadFromURL();
+  }
+
+  loadFromURL() {
+    const params = new URLSearchParams(window.location.search);
+    const label = this.label?.toLowerCase();
+
+    if (label.includes("ice cost") && params.has('iceCost')) {
+      this.value = Number(params.get('iceCost'));
+    } else if (label.includes("hours of ice") && params.has('hours')) {
+      this.value = Number(params.get('hours'));
+    } else if (label.includes("coach") && params.has('coachCost')) {
+      this.value = Number(params.get('coachCost'));
+    } else if (label.includes("jersey") && params.has('jerseyCost')) {
+      this.value = Number(params.get('jerseyCost'));
+    } else if (label.includes("player") && params.has('numPlayers')) {
+      this.value = Number(params.get('numPlayers'));
+    }
+  }
+
   updated(changedProperties) {
     if (changedProperties.has("value")) {
       this.dispatchEvent(new CustomEvent("value-changed", {

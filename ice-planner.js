@@ -155,7 +155,7 @@ export class IcePlanner extends DDDSuper(I18NMixin(LitElement)) {
   // Calculate total cost and cost per player
   calculateCosts() {
     // ((iceCost * hours) + coachCost + jerseyCost) * (1 + feePercent/100) + fixedFee) / numPlayers
-    const subtotal = (this.iceCost * this.hours) + this.coachCost + this.jerseyCost;
+    const subtotal = (this.iceCost * this.hours) + this.coachCost + (this.jerseyCost * this.numPlayers);
     this.totalCost = (subtotal * (1 + this.feePercent / 100)) + this.fixedFee;
     this.costPerPlayer = this.totalCost / this.numPlayers;
   }

@@ -141,7 +141,7 @@ export class IcePlanner extends DDDSuper(I18NMixin(LitElement)) {
         </div>
 
         <div class="results">
-          <button @click="${this.copyShareLink}">Copy Share Link</button>
+          <button @click="${this.copyShareLink}">Share</button>
           <div class="total">Total Cost: $${this.totalCost.toFixed(2)}</div>
           <div class="per-player">Cost Per Player: $${this.costPerPlayer.toFixed(2)}</div>
         </div>
